@@ -1,16 +1,15 @@
 import React from "react";
 import "./App.css";
-import mondaySdk from "monday-sdk-js";
 import "monday-ui-react-core/dist/main.css"
 //Explore more Monday React Components here: https://style.monday.com/
 import AttentionBox from "monday-ui-react-core/dist/AttentionBox.js"
 import { Search } from "./components/Search";
 
-const monday = mondaySdk();
+
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
+    super(props); 
 
     // Default state
     this.state = {
