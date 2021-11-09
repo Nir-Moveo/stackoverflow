@@ -1,4 +1,3 @@
-import { SearchContainer, SearchIcon, SearchInput } from "./SearchStyle"
 import mondaySdk from "monday-sdk-js";
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
@@ -46,9 +45,5 @@ export const Search = ()=>{
   useEffect(() => {
     fetchApi();
   }, []);
-  return (
-  <SearchContainer>
-    <SearchIcon/>
-    <SearchInput></SearchInput>
-  </SearchContainer>)
-}
+  return <></>;
+};
