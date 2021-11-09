@@ -1,9 +1,7 @@
-import { SearchContainer, SearchIcon, SearchInput } from "./SearchStyle"
 import mondaySdk from "monday-sdk-js";
 import React, { useEffect, useState } from "react";
 
-
-export const Search = ()=>{
+export const Search = () => {
   // const d =monday.listen("context", async (res)=>{
   //  return await res.data.itemId;
   // })
@@ -19,24 +17,22 @@ export const Search = ()=>{
       });
       let query = `query { items (ids: [${itemId}]) { name }}`;
 
-      fetch ("https://api.monday.com/v2", {
-        method: 'post',
-        mode:'no-cors',
+      fetch("https://api.monday.com/v2", {
+        method: "post",
+        mode: "no-cors",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization' : process.env.MONDAY_API_KEY as string
-         },
-         body: JSON.stringify({
-           query : query
-         })
-        })
-         .then(res => res.json())
-         .then(res => console.log(JSON.stringify(res, null, 2)))
-         .catch((err)=>{
-           console.log(err);
-           
-         });
-      
+          "Content-Type": "application/json",
+          Authorization: process.env.MONDAY_API_KEY as string,
+        },
+        body: JSON.stringify({
+          query: query,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => console.log(JSON.stringify(res, null, 2)))
+        .catch((err) => {
+          console.log(err);
+        });
     } catch (err) {
       setErrorMessage("Something went wrong");
     }
@@ -45,9 +41,5 @@ export const Search = ()=>{
   useEffect(() => {
     fetchApi();
   }, []);
-  return (
-  <SearchContainer>
-    <SearchIcon/>
-    <SearchInput></SearchInput>
-  </SearchContainer>)
-}
+  return <></>;
+};
