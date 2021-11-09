@@ -1,11 +1,15 @@
 import mondaySdk from "monday-sdk-js";
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
+import { CardList } from "./CardList";
+import { ICard } from "./Card/Card";
 
 export const Search = ()=>{
   const [errorMessage, setErrorMessage] = useState("");
+  const [_data,setData]=useState([]);
   const monday = mondaySdk();
   let title="";
+
   monday.setToken('eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjEzMjIzNDYwOSwidWlkIjoyNTAzNjQ0NywiaWFkIjoiMjAyMS0xMS0wOVQwODozNzowMS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTEwMjMyOCwicmduIjoidXNlMSJ9.IIQfjOKJy3LwsBynwfyTV7QuNk6aPJdwjs1dfgZsAok');
   // const [itemId, setItemId] = useState("");
   const fetchStack = async () => {
@@ -15,6 +19,7 @@ export const Search = ()=>{
       url:`https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=${title}&site=stackoverflow&filter=!nKzQUR3Egv`
     })
     console.log(data);
+    setData(data.data.items)
     
   }
   catch (err){
@@ -45,5 +50,7 @@ export const Search = ()=>{
   useEffect(() => {
     fetchApi();
   }, []);
-  return <></>;
+  return (
+    <CardList cards={_data}/>
+  );
 };

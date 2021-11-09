@@ -1,10 +1,9 @@
 import React from "react";
-import "./App.css";
+import "./App.css"; 
 import "monday-ui-react-core/dist/main.css"
 //Explore more Monday React Components here: https://style.monday.com/
 import AttentionBox from "monday-ui-react-core/dist/AttentionBox.js";
 import { Search } from "./components/Search";
-import { Card } from "./components/Card";
 
 
 
@@ -52,12 +51,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <AttentionBox
-          title="Hello Monday Apps!"
-          text="Let's start building your amazing app, which will change the world!"
-          type="success"
-        />
-        <Card {...cardMock} />
         <Search />
       </div>
     );
