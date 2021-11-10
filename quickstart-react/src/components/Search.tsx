@@ -1,56 +1,22 @@
-import mondaySdk from "monday-sdk-js";
-import React, { useEffect, useState } from "react";
-import axios from 'axios'
-import { CardList } from "./CardList";
-import { ICard } from "./Card/Card";
+import React, { useRef } from "react";
+import { SearchArea, SearchContainer, SearchIcon } from "./SearchStyle";
+import search from "../assets/search.png";
 
-export const Search = ()=>{
-  const [errorMessage, setErrorMessage] = useState("");
-  const [_data,setData]=useState([]);
-  const monday = mondaySdk();
-  let title="";
+export const Search = (props:{input:string, fetchApi:(input:string)=>void}) => {
+const inputEl = useRef(null);
 
-  monday.setToken('eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjEzMjIzNDYwOSwidWlkIjoyNTAzNjQ0NywiaWFkIjoiMjAyMS0xMS0wOVQwODozNzowMS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTEwMjMyOCwicmduIjoidXNlMSJ9.IIQfjOKJy3LwsBynwfyTV7QuNk6aPJdwjs1dfgZsAok');
-  // const [itemId, setItemId] = useState("");
-  const fetchStack = async () => {
-    try{
-   const data= await axios({
-      method: 'get',
-      url:`https://api.stackexchange.com/2.3/search/advanced?order=desc&sort=relevance&q=${title}&site=stackoverflow&filter=!nKzQUR3Egv`
-    })
-    console.log(data);
-    setData(data.data.items)
-    
-  }
-  catch (err){
-    console.log(err);
-    
-  }
-  }
-  const fetchApi = async () => {
-    try {
-      await monday.listen("context", (res) => {
-        console.log(res.data);
-        const itemId=res.data.itemId; 
-         
-        monday.api(`query { items (ids: ${itemId}) { name }}`).then((res)=>{
-        console.log(res.data.items[0].name);
-        title=res.data.items[0].name;
-        fetchStack();
-      }).catch((err)=>{
-        console.log({ err: "not okey",data: err}); 
-      })
-      });
-     
-    } catch (err) {
-      setErrorMessage("Something went wrong");
+  const onChange=()=>{
+    if(inputEl && inputEl.current){
+       const d= inputEl.current as HTMLInputElement;
+       props.fetchApi(d.value);
     }
-  };
-
-  useEffect(() => {
-    fetchApi();
-  }, []);
-  return (
-    <CardList cards={_data}/>
-  );
+ 
+  
+    // console.log(d.value);
+    // props.fetchApi(inputEl);
+  }
+  return <SearchContainer>
+    <SearchArea ref={inputEl} placeholder={props.input} type="text" ></SearchArea>
+    <SearchIcon src={search} onClick={()=>onChange()}></SearchIcon>
+  </SearchContainer>;
 };

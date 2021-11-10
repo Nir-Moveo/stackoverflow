@@ -3,7 +3,7 @@ import "./App.css";
 import "monday-ui-react-core/dist/main.css"
 //Explore more Monday React Components here: https://style.monday.com/
 import AttentionBox from "monday-ui-react-core/dist/AttentionBox.js";
-import { Search } from "./components/Search";
+import { Main } from "./components/Main";
 
 
 
@@ -51,7 +51,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Search />
+        <Main />
       </div>
     );
   }
